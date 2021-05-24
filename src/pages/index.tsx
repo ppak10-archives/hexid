@@ -7,8 +7,12 @@
 import {useState} from 'react';
 
 // Constants
-const DISCOVERY_API_ROUTE = 'https://discovery-b.mainnet.audius.radar.tech/v1/full/search/autocomplete';
-const NODE_API_ROUTE = 'https://creatornode3.audius.co/ipfs';
+const AUDIUS_DISCOVERY_API_ROUTE = 'https://discovery-b.mainnet.audius.radar.tech/v1/full/search/autocomplete';
+const AUDIUS_NODE_API_ROUTE = 'https://creatornode3.audius.co/ipfs';
+// const UJO_IPFS_ROUTE = 'https://ipfs.infura.io/ipfs';
+
+// Styles
+import styles from './index.module.scss';
 
 export default function Home() {
   // Hooks
@@ -18,7 +22,7 @@ export default function Home() {
   // Callbacks
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${DISCOVERY_API_ROUTE}?limit=3&offset=0&query=${request}`);
+    const response = await fetch(`${AUDIUS_DISCOVERY_API_ROUTE}?limit=3&offset=0&query=${request}`);
     const data = await response.json();
     console.log('data', data)
     if (response.status === 200) {
@@ -28,7 +32,7 @@ export default function Home() {
 
   const handleDownload = async (cid) => {
     if (cid) {
-      const response = await fetch(`${NODE_API_ROUTE}/${cid}`);
+      const response = await fetch(`${AUDIUS_NODE_API_ROUTE}/${cid}`);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -50,7 +54,7 @@ export default function Home() {
   ));
 
   return (
-    <div>
+    <div className={styles.home}>
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>Enter Search:</legend>
