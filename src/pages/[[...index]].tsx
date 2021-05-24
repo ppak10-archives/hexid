@@ -23,12 +23,12 @@ export default function Home() {
   const [request, setRequest] = useState('');
   const theme = useSelector(({common}) => common.theme);
   const results = useSelector(({search}) => search.results);
-  const {isLoading} = useSelector(({api}) => api.searchAudiusDiscoveryB);
+  const {error, isLoading} = useSelector(({api}) => api.searchAudiusDiscoveryB);
 
   // Callbacks
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(getSearchAudiusDiscoveryB(request));
+    dispatch(getSearchAudiusDiscoveryB(request, 0, 5));
   };
 
   const handleDownload = async (cid) => {
@@ -48,7 +48,7 @@ export default function Home() {
   // JSX
   const trackListItemsJSX = results.tracks && results.tracks.map((track) => (
     <li key={track.id}>
-      <h1>{track.title}</h1>
+      <h2>{track.title}</h2>
       <p>{track.description}</p>
       <button onClick={() => handleDownload(track.download.cid)}>Download</button>
     </li>
@@ -61,11 +61,18 @@ export default function Home() {
       `}
     >
       <h1>hexid</h1>
-      <form onSubmit={handleSubmit}>
-        <fieldset>
-          <legend>Enter Search:</legend>
-          <input value={request} onChange={(e) => setRequest(e.target.value)} />
-        </fieldset>
+      <p>{error.search}</p>
+      <form 
+        className={
+          theme === 'light' ? styles['light-search'] : styles['dark-search']
+        }
+        onSubmit={handleSubmit}
+      >
+        <input
+          value={request}
+          onChange={(e) => setRequest(e.target.value)}
+          placeholder="Enter search here"
+        />
         <button disabled={isLoading} type="submit">Search</button>
       </form>
       <ul>

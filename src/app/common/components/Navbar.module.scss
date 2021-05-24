@@ -3,9 +3,46 @@
  * Navbar styles
  */
 
-.navbar {
-  background-color: gray;
+@import 'app/styles/color';
+
+@mixin navbar {
   display: flex;
   grid-area: navbar;
-  justify-content: space-between;
+  justify-content: flex-end;
+  padding: 0.25em;
+  transition: 0.25s;
+
+  button {
+    background-color: transparent;
+    outline: none;
+    border-radius: 0.25em;
+    border-style: solid;
+    transition: 0.25em;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.dark-navbar {
+  @include navbar;
+  background-color: $dark-background-color;
+  color: $dark-text-color;
+
+  button {
+    border-color: $dark-text-color;
+    color: $dark-text-color;
+  }
+}
+
+.light-navbar {
+  @include navbar;
+  background-color: $light-background-color;
+  color: $light-text-color;
+
+  button {
+    border-color: $light-text-color;
+    color: $light-text-color;
+  }
 }

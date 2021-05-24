@@ -28,8 +28,11 @@ export default function Navbar() {
   }, [theme]);
 
   return (
-    <nav className={styles.navbar}>
-      <a>hexid</a>
+    <nav
+      className={
+        theme === 'light' ? styles['light-navbar'] : styles['dark-navbar']
+      }
+    >
       <button onClick={handleToggleTheme}>
         {theme === 'light' ? 'Dark' : 'Light'}
       </button>

@@ -3,9 +3,23 @@
  * Footer component
  */
 
-.footer {
-  background-color: gray;
+@import 'app/styles/color';
+
+@mixin footer {
   display: flex;
   grid-area: footer;
   justify-content: space-between;
+  transition: 0.25s;
+}
+
+.dark-footer {
+  @include footer;
+  background-color: $dark-background-color;
+  color: $dark-text-color;
+}
+
+.light-footer {
+  @include footer;
+  background-color: $light-background-color;
+  color: $light-text-color;
 }

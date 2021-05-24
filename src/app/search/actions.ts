@@ -21,6 +21,10 @@ export const getSearchAudiusDiscoveryB = (query, offset = 0, limit = 3) =>
       if (response.status === 200) {
         data = await response.json();
         dispatch(setSearchAudiusDiscoveryB(data.data));
+      } else if (response.status === 500) {
+        dispatch(api.setSearchAudiusDiscoveryBError({
+          search: 'Failed to search.',
+        }));
       }
       dispatch(api.setSearchAudiusDiscoveryBIsLoading(false));
       return data;

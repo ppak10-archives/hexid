@@ -11,6 +11,10 @@
   justify-content: center;
   transition: 0.25s;
   width: 100%;
+
+  h1 {
+    font-size: 10em;
+  }
 }
 
 .dark-home {
@@ -23,4 +27,80 @@
   @include home;
   background-color: $light-background-color;
   color: $light-text-color;
+}
+
+@mixin search {
+  display: flex;
+
+  input {
+    background-color: transparent;
+    border-radius: 0.25em;
+    border-style: solid;
+    border-right-width: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    font-size: 1.5em;
+    outline: none;
+    padding: 0.5em;
+    width: 30em;
+  }
+
+  button {
+    background-color: transparent;
+    border-radius: 0.25em;
+    border-style: solid;
+    border-left-width: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    font-size: 1.5em;
+    outline: none;
+    padding: 0.5em;
+    transition: 0.25s;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.dark-search {
+  @include search;
+  background-color: $dark-background-color;
+  color: $dark-text-color;
+
+  button {
+    border-color: $dark-text-color;
+    color: $dark-text-color;
+
+    &:hover {
+      background-color: $light-background-color;
+      color: $light-text-color;
+    }
+  }
+
+  input {
+    border-color: $dark-text-color;
+    color: $dark-text-color;
+  } 
+}
+
+.light-search {
+  @include search;
+  background-color: $light-background-color;
+  color: $light-text-color;
+
+  button {
+    border-color: $light-text-color;
+    color: $light-text-color;
+
+    &:hover {
+      background-color: $dark-background-color;
+      color: $dark-text-color;
+    }
+  }
+
+  input {
+    border-color: $light-text-color;
+    color: $light-text-color;
+  } 
 }
