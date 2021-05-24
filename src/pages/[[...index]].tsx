@@ -5,10 +5,12 @@
 
 // Node Modules
 import {useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+
+// Actions
+import {getSearchAudiusDiscoveryB} from 'app/search/actions';
 
 // Constants
-const AUDIUS_DISCOVERY_API_ROUTE = 'https://discovery-b.mainnet.audius.radar.tech/v1/full/search/autocomplete';
 const AUDIUS_NODE_API_ROUTE = 'https://creatornode3.audius.co/ipfs';
 // const UJO_IPFS_ROUTE = 'https://ipfs.infura.io/ipfs';
 
@@ -17,19 +19,16 @@ import styles from './[[...index]].module.scss';
 
 export default function Home() {
   // Hooks
+  const dispatch = useDispatch();
   const [request, setRequest] = useState('');
-  const [data, setData] = useState({});
   const theme = useSelector(({common}) => common.theme);
+  const results = useSelector(({search}) => search.results);
+  const {isLoading} = useSelector(({api}) => api.searchAudiusDiscoveryB);
 
   // Callbacks
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${AUDIUS_DISCOVERY_API_ROUTE}?limit=3&offset=0&query=${request}`);
-    const data = await response.json();
-    console.log('data', data)
-    if (response.status === 200) {
-      setData(data.data);
-    }
+    dispatch(getSearchAudiusDiscoveryB(request));
   };
 
   const handleDownload = async (cid) => {
@@ -47,7 +46,7 @@ export default function Home() {
   };
 
   // JSX
-  const trackListItemsJSX = data.tracks && data.tracks.map((track) => (
+  const trackListItemsJSX = results.tracks && results.tracks.map((track) => (
     <li key={track.id}>
       <h1>{track.title}</h1>
       <p>{track.description}</p>
@@ -67,7 +66,7 @@ export default function Home() {
           <legend>Enter Search:</legend>
           <input value={request} onChange={(e) => setRequest(e.target.value)} />
         </fieldset>
-        <button type="submit">Search</button>
+        <button disabled={isLoading} type="submit">Search</button>
       </form>
       <ul>
         {trackListItemsJSX}

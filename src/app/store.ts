@@ -8,10 +8,14 @@ import {combineReducers, createStore, applyMiddleware} from "redux";
 import thunkMiddleware from 'redux-thunk';
 
 // Reducers
+import api from 'app/api/reducer';
 import common from 'app/common/reducer';
+import search from 'app/search/reducer';
 
 const reducers = combineReducers({
+  api,
   common,
+  search,
 });
 
 const rootReducer = (state, action) => {
