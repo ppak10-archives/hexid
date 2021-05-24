@@ -12,7 +12,7 @@ const AUDIUS_NODE_API_ROUTE = 'https://creatornode3.audius.co/ipfs';
 // const UJO_IPFS_ROUTE = 'https://ipfs.infura.io/ipfs';
 
 // Styles
-import styles from './index.module.scss';
+import styles from './[[...index]].module.scss';
 
 export default function Home() {
   // Hooks
@@ -54,7 +54,8 @@ export default function Home() {
   ));
 
   return (
-    <div className={styles.home}>
+    <div className={`page ${styles.home}`}>
+      <h1>hexid</h1>
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>Enter Search:</legend>

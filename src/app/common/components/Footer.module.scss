@@ -1,0 +1,11 @@
+/** 
+ * Footer.module.scss
+ * Footer component
+ */
+
+.footer {
+  background-color: gray;
+  display: flex;
+  grid-area: footer;
+  justify-content: space-between;
+}

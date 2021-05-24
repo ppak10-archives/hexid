@@ -1,0 +1,11 @@
+/**
+ * Navbar.module.scss
+ * Navbar styles
+ */
+
+.navbar {
+  background-color: gray;
+  display: flex;
+  grid-area: navbar;
+  justify-content: space-between;
+}
