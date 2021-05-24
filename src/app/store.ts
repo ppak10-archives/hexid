@@ -8,7 +8,11 @@ import {combineReducers, createStore, applyMiddleware} from "redux";
 import thunkMiddleware from 'redux-thunk';
 
 // Reducers
-// const reducers = combineReducers({});
+import common from 'app/common/reducer';
+
+const reducers = combineReducers({
+  common,
+});
 
 const rootReducer = (state, action) => {
   if (action.type === 'INITIAL_STATE') {
@@ -17,8 +21,7 @@ const rootReducer = (state, action) => {
     state = undefined;
   }
 
-  // return reducers(state, action);
-  return state;
+  return reducers(state, action);
 };
 
 // Store

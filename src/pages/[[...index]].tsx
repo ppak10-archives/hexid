@@ -5,6 +5,7 @@
 
 // Node Modules
 import {useState} from 'react';
+import {useSelector} from 'react-redux';
 
 // Constants
 const AUDIUS_DISCOVERY_API_ROUTE = 'https://discovery-b.mainnet.audius.radar.tech/v1/full/search/autocomplete';
@@ -18,6 +19,7 @@ export default function Home() {
   // Hooks
   const [request, setRequest] = useState('');
   const [data, setData] = useState({});
+  const theme = useSelector(({common}) => common.theme);
 
   // Callbacks
   const handleSubmit = async (e) => {
@@ -54,7 +56,11 @@ export default function Home() {
   ));
 
   return (
-    <div className={`page ${styles.home}`}>
+    <div
+      className={`
+        page ${theme === 'light' ? styles['light-home'] : styles['dark-home']}
+      `}
+    >
       <h1>hexid</h1>
       <form onSubmit={handleSubmit}>
         <fieldset>

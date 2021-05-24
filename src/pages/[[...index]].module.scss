@@ -3,9 +3,24 @@
  * Styles for home page
  */
 
-.home {
+@import 'app/styles/color';
+
+@mixin home {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  transition: 0.25s;
   width: 100%;
+}
+
+.dark-home {
+  @include home;
+  background-color: $dark-background-color;
+  color: $dark-text-color;
+}
+
+.light-home {
+  @include home;
+  background-color: $light-background-color;
+  color: $light-text-color;
 }
