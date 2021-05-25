@@ -59,7 +59,7 @@ const apiReducer = (key: string) => (state = INITIAL_STATE, action) => {
 }
 
 // TODO: look into creating appropriate reducer type / interface.
-const reducer= combineReducers({
+const reducer = combineReducers({
   // Creates reducer functions for provided api keys.
   // That way it can be referenced consistently with `useSelector` hook, i.e.:
   // ```
