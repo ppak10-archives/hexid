@@ -31,14 +31,14 @@ export default function Home() {
     dispatch(getSearchAudiusDiscoveryB(request, 0, 5));
   };
 
-  const handleDownload = async (cid) => {
+  const handleDownload = async (cid, title) => {
     if (cid) {
       const response = await fetch(`${AUDIUS_NODE_API_ROUTE}/${cid}`);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${cid}.mp3`;
+      a.download = `${title}.mp3`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -47,10 +47,27 @@ export default function Home() {
 
   // JSX
   const trackListItemsJSX = results.tracks && results.tracks.map((track) => (
-    <li key={track.id}>
-      <h2>{track.title}</h2>
-      <p>{track.description}</p>
-      <button onClick={() => handleDownload(track.download.cid)}>Download</button>
+    <li
+      className={
+        theme === 'light'
+          ? styles['light-search-item']
+          : styles['dark-search-item']
+      }
+      key={track.id}
+    >
+      <img src={track.artwork['150x150']} />
+      <div className={styles['search-item-details']}>
+        <h2>{track.title}</h2>
+        <p>{track.description}</p>
+      </div>
+      {track.downloadable && (
+        <button
+          className={styles['search-item-download-button']}
+          onClick={() => handleDownload(track.download.cid, track.title)}
+        >
+          Download
+        </button>
+      )}
     </li>
   ));
 

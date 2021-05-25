@@ -15,6 +15,12 @@
   h1 {
     font-size: 10em;
   }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    width: 50em;
+  }
 }
 
 .dark-home {
@@ -103,4 +109,64 @@
     border-color: $light-text-color;
     color: $light-text-color;
   } 
+}
+
+@mixin search-item {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  margin: 1em;
+
+  button {
+    background-color: transparent;
+    margin-left: auto;
+    outline: none;
+    border-radius: 0.25em;
+    border-style: solid;
+    transition: 0.25em;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  img {
+    border-radius: 0.25em;
+    border-style: solid;
+    height: 75px;
+    width: 75px;
+  }
+}
+
+.dark-search-item {
+  @include search-item;
+
+  button {
+    border-color: $dark-text-color;
+    color: $dark-text-color;
+  }
+
+  img {
+    border-color: $dark-text-color;
+    color: $dark-text-color;
+  }
+}
+
+.light-search-item {
+  @include search-item;
+
+  button {
+    border-color: $light-text-color;
+    color: $light-text-color;
+  }
+
+  img {
+    border-color: $light-text-color;
+    color: $light-text-color;
+  }
+}
+
+.search-item-details {
+  margin: 0 1em;
+  width: 35em;
 }
